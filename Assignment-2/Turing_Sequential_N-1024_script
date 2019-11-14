@@ -1,0 +1,17 @@
+
+#!/bin/bash
+# ==============================
+#PBS -l walltime=01:00:00
+#PBS -l nice=10
+#PBS -l nodes=1:ppn=1
+#PBS -q default
+# ==============================
+ExecutableName=YoshimuraSeqVer_Exe
+FileName=YoshimuraSeqVer.c
+# ==============================
+# Compile your code
+mpicc -o $PBS_O_WORKDIR/$ExecutableName $PBS_O_WORKDIR/$FileName
+
+# Run your executable
+mpirun --mca mpi_cuda_support 0 $PBS_O_WORKDIR/$ExecutableName 10
+# ==============================
